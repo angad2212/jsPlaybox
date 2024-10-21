@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label>Task to be done</label>
+    <input placeholder="enter the description" id="input"><br>
+    <button onclick="addTodo()">add item to list</button>
+
+    <div id="todos">
+
+    </div>
+    <script>
+        let globalID = 1; //helps give authenticity to different todo items 
+
+        function addTodo(){
+            const task = document.getElementById('input').value;
+            const parent = document.getElementById('todos');
+
+            parent.appendChild(createChild(task, globalID++));
+        }
+
+        function createChild(task, id){
+            const child = document.createElement("div");
+            const firstGrandChild = document.createElement('div');
+            firstGrandChild.innerHTML = task;
+
+            const secondGrandChild = document.createElement('button');
+            secondGrandChild.innerHTML = "Done";
+            //now we also need to set the onclick attribute of the button
+            secondGrandChild.setAttribute('onclick', `done(${id})`);
+
+            child.appendChild(firstGrandChild);
+            child.appendChild(secondGrandChild);
+            child.setAttribute("id", id);
+
+            return child;
+        }
+
+        function done(id){
+            const todoToRemove = document.getElementById(id);
+            todoToRemove.remove();
+        }
+    </script>
+</body>
+</html>

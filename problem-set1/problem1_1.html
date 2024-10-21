@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="toggle-button">
+        show text
+    </button>
+    <p id="hidden-text">
+        some hidden text
+    </p>
+    <script>
+        const toggle = document.getElementById('toggle-button');
+        const hidden = document.getElementById('hidden-text');
+
+        toggle.addEventListener('click', ()=>{
+            if(hidden.style.display === 'none'){
+                hidden.style.display = 'block';
+                toggle.textContent = 'hide text';
+            }else{
+                hidden.style.display = 'none';
+                toggle.textContent = 'show text';
+            }
+        })
+    </script>
+</body>
+</html>
