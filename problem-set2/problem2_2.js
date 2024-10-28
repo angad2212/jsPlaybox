@@ -42,7 +42,7 @@ app.delete('/notes/:index', (req,res)=>{
 
     //check is the index is in bounds 
     const size = notes.length;
-    if(note>size-1){
+    if(note>-1){
         res.status(400).json({
             message: 'out of bounds'
         })
