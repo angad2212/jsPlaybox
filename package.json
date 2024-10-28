@@ -1,0 +1,15 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "JS Playbox is a curated set of 25 advanced JavaScript challenges, engineered to fortify backend and frontend logic. Each problem dives deep into core principles, aiming to optimize performance, master asynchronous flows, and build scalable, high-performance web architectures.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
