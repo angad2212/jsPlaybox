@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <h2>Search Fruit</h2>
+    <input type="text" id="searchInput" placeholder="type the fruit">
+    <ul id="fruitList">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Cherry</li>
+        <li>Grape</li>
+        <li>Orange</li>
+        <li>Pineapple</li>
+        <li>Strawberry</li>
+        <li>Watermelon</li>
+    </ul>
+
+    <script>
+        // Get references to the search input and list items
+        const searchInput = document.getElementById("searchInput");
+        const fruitList = document.getElementById("fruitList");
+        const fruits = Array.from(fruitList.getElementsByTagName("li"));
+        //This finds all the <li> items (each fruit) in the list and turns them into an array 
+        //so we can go through each item one by one.
+
+        // Event listener to filter items in real-time as user types
+        searchInput.addEventListener("input", () => {
+            const filter = searchInput.value.toLowerCase();
+            fruits.forEach(fruit => {
+            const itemText = fruit.textContent.toLowerCase();
+            
+            // Check if the item text includes the filter text
+            if (itemText.includes(filter)) {
+                // If it matches, display the item
+                fruit.style.display = ""; //no change
+            } else {
+                // If it doesn't match, hide the item
+                fruit.style.display = "none";
+            }
+            });
+        });
+    </script>
+</body>
+</html>
