@@ -21,8 +21,9 @@ const uploads = multer({
     storage: storage,
     limits: {fileSize: 1 * 1024 * 1024}, //1MB
     fileFilter: (req, file, cb)=>{
-        const filetypes = /jpg|jpeg|png/;
+        const filetypes = /jpg|jpeg|png/; //types allowed
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+        //the above checks the file type if it matches the allowed types
         const mimetype = filetypes.test(file.mimetype);
 
         if(mimetype && extname){
@@ -34,7 +35,7 @@ const uploads = multer({
 })
 
 app.post('/upload-image', (req, res) => {
-    upload.single('image')(req, res, (err) => {
+    uploads.single('image')(req, res, (err) => {
       if (err) {
         // Handle errors
         if (err instanceof multer.MulterError) {
@@ -57,7 +58,7 @@ app.post('/upload-image', (req, res) => {
     });
   });
 
-  
+
 app.listen(port, ()=>{
     console.log(`server running on port: ${port}`)
 })
