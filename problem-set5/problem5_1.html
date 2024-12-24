@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    input {
+      font-size: 16px;
+      padding: 5px;
+      width: 100px;
+      text-align: center;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #timer {
+      font-size: 48px;
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Countdown Timer</h1>
+  <div>
+    <input type="number" id="timeInput" placeholder="Seconds" min="0">
+  </div>
+  <div>
+    <button id="startBtn">Start</button>
+    <button id="pauseBtn">Pause</button>
+    <button id="resetBtn">Reset</button>
+  </div>
+  <div id="timer">00:00</div>
+  <script>
+    const timeInput = document.getElementById("timeInput");
+    const startBtn = document.getElementById("startBtn");
+    const pauseBtn = document.getElementById("pauseBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const timerDisplay = document.getElementById("timer");
+
+    let countdown; // To hold the interval ID
+    let remainingTime = 0; // To track the remaining time in seconds
+    let isPaused = false; // To check if the timer is paused
+
+    // Function to format time (e.g., 90 seconds -> "01:30")
+    function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    }
+
+    // Function to start the timer
+    function startTimer() {
+    // Check if a countdown is already running
+    if (countdown) clearInterval(countdown);
+
+    // If not paused, get the new time from input
+    if (!isPaused) {
+        const inputSeconds = parseInt(timeInput.value, 10);
+        if (isNaN(inputSeconds) || inputSeconds <= 0) {
+        alert("Please enter a valid number of seconds!");
+        return;
+        }
+        remainingTime = inputSeconds;
+    }
+
+    // Update the display immediately
+    timerDisplay.textContent = formatTime(remainingTime);
+
+    // Start the countdown
+    countdown = setInterval(() => {
+        if (remainingTime > 0) {
+        remainingTime--;
+        timerDisplay.textContent = formatTime(remainingTime);
+        } else {
+        clearInterval(countdown);
+        alert("Time’s up!");
+        }
+    }, 1000);
+
+    isPaused = false;
+    }
+
+    // Function to pause the timer
+    function pauseTimer() {
+    if (countdown) {
+        clearInterval(countdown);
+        countdown = null; // Prevent multiple intervals from starting
+        isPaused = true;
+    }
+    }
+
+    // Function to reset the timer
+    function resetTimer() {
+    if (countdown) clearInterval(countdown);
+    countdown = null;
+    remainingTime = 0;
+    timerDisplay.textContent = "00:00";
+    timeInput.value = ""; // Clear the input field
+    isPaused = false;
+    }
+
+    // Attach event listeners
+    startBtn.addEventListener("click", startTimer);
+    pauseBtn.addEventListener("click", pauseTimer);
+    resetBtn.addEventListener("click", resetTimer);
+
+  </script>
+</body>
+</html>
